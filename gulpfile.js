@@ -1,34 +1,34 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var imagemin = require('gulp-imagemin');
 var uglify = require('gulp-uglify');
+var watch = require('gulp-watch');
+var cleanCSS = require('gulp-clean-css');
+var rename = require('gulp-rename');
+gulp.task('sass' , function(){
 
-gulp.task('sass', function(){
-    
-    console.log('sass is on');
-    
-    return gulp.src('dev/scss/styles.scss')
-           .pipe(sass())
-           .pipe(gulp.dest('dev/css'))
-    
+  return gulp.src('dev/scss/style.scss')
+              .pipe(sass())
+              .pipe(gulp.dest('dev/css/'))
+});
+gulp.task('sassall' , function(){
+
+  return gulp.src('dev/scss/*.scss')
+              .pipe(sass())
+              .pipe(gulp.dest('dev/css'))
 });
 
+gulp.task('watch' , function(){
+gulp.watch('dev/scss/*.scss', [sass]);
+gulp.watch('dev/css/*.css', [mincss]);
 
-
-gulp.task('prod', function(){
-    
-    gulp.src('dev/js/*.js')
-           .pipe(uglify())
-           .pipe(gulp.dest('prod/js'));
-    
-    gulp.start('sass');
-    
-    gulp.src('dev/images/*.*')
-    .pipe(gulp.dest('prod/images'))
-    
-    gulp.src('dev/css/*.css')
-    .pipe(gulp.dest('prod/css'))
-    
-    gulp.src('dev/*.html')
-    .pipe(gulp.dest('prod'))
-    
 });
+gulp.task('min-css' , function(){
+
+  return gulp.src('dev/css/*.css')
+              .pipe(cleanCSS())
+              .pipe(rename({suffix:'.min'}))
+              .pipe(gulp.dest('dev/css/'));
+});
+
+gulp.task('default', ['sass', 'sassall']);

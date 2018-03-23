@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>SASS - Syntatically Awesome Style Sheets</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="js/scripts.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Rochester" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="page">
+    
+    <header>
+        <h1>SASS</h1>
+        <h2>Cheat sheet</h2>
+    </header>
+    <main>
+        <section>
+            
+            <article id="variable">
+                <h3>Variables</h3>
+                <p>Contient une information dupliquée dans la feuille de styles.</p>
+                <pre><span><em>$highlight</em>: rgba(255, 255, 0, 0.35);</span>
+<span><em>$header-height</em>: 125px;</span>
+<span></span>
+<span>em {</span>
+<span>  background: <em>$highlight</em>;</span>
+<span>}</span>
+<span></span>
+<span>header {</span>
+<span>  height: <em>$header-height</em>;</span>
+<span>}</span></pre>
+                <h4>Résultat :</h4>
+                <pre><span>em {</span>
+<span>  background: rgba(255, 255, 0, 0.35);</span>
+<span>}</span>
+<span></span>
+<span>header {</span>
+<span>  height: 125px;</span>
+<span>}</span></pre>
+            </article>
+            
+            <article id="imbrication">
+                <h3>Imbrication</h3>
+                <p>Concevoir une hiérarchie de contenus.</p>
+                <pre><span>ul {</span>
+<span>  margin: 0;</span>
+<span>  padding: 0;</span>
+<span>    <em>li {</em>  </span>
+<span>      list-style: none;</span>
+<span>      display: block;</span>
+<span>      <em>a {</em></span>
+<span>        text-decoration: none;</span>
+<span>        margin: 0;</span>
+<span>        padding: 10px;</span>
+<span>        color:#888;</span>
+<span>        line-height:30px;</span>
+<span>      }</span>
+<span>      <em>&:hover {</em>background:#eee;}</span>
+<span>    }</span>
+<span>  }</span>
+<span>}</span></pre>
+                <h4>Résultat :</h4>
+                <pre><span>ul {</span>
+<span>  margin: 0;</span>
+<span>  padding: 0;</span>
+<span>}</span>
+<span>ul li {</span>
+<span>  list-style: none;</span>
+<span>  display: block;</span>
+<span>}</span>
+<span>ul li a {</span>
+<span>  text-decoration: none;</span>
+<span>  padding:10px;</span>
+<span>  color:#888;</span>
+<span>  display:block;</span>
+<span>  line-height:30px;</span>
+<span>}</span>
+<span>ul li a:hover {</span>
+<span>  background:#eee;</span>
+<span>}</span></pre>
+                
+                <p>Décliner des propriétés :</p>
+                <pre><span>aside{</span>
+<span>  > span{</span>
+<span>    <em>border: {</em></span>
+<span>      style: solid;</span>
+<span>      color: #ccc;</span>
+<span>        <em>top: {</em></span>
+<span>          width: 1px;</span>
+<span>        }</span>
+<span>        <em>right: {</em></span>
+<span>          width: 0px;</span>
+<span>        }</span>
+<span>        <em>bottom: {</em></span>
+<span>          width: 1px;</span>
+<span>        }</span>
+<span>        <em>left: {</em></span>
+<span>          width: 1px;</span>
+<span>        }</span>
+<span>    display: block;</span>
+<span>    }</span>
+<span>  }</span>
+<span>}</span>
+</pre>
+                <h4>Résultat :</h4>
+                <pre><span>aside > span{</span>
+<span>  border-top: solid #ccc 1px;</span>
+<span>  border-right: solid #ccc 0px;</span>
+<span>  border-bottom: solid #ccc 1px;</span>
+<span>  border-left: solid #ccc 1px;</span>
+<span>  display: block;</span>
+<span>}</span></pre>
+            </article>
+            
+            <article id="arithmetique">
+                <h3>Arithmétique</h3>
+                <p>Utiliser des opérations mathématiques pour résoudre les calculs complexes ou à données variables.</p>
+                <pre><span>$header-height: 125px;</span>
+<span></span>
+<span>aside {</span>
+<span>  position: fixed;</span>
+<span>  top: <em>($header-height + 60)</em>;</span>
+<span>}</span>
+<span></span>
+<span>section {</span>
+<span>  float: right;</span>
+<span>  width: <em>pourcentage(2/3)</em>;</span>
+<span>}</span></pre>
+                <h4>Résultat :</h4>
+                <pre><span>aside {</span>
+<span>  position: fixed;</span>
+<span>  top: 185px;</span>
+<span>}</span>
+<span></span>
+<span>section {</span>
+<span>  float: right;</span>
+<span>  width: 33.33333333%;</span>
+<span>}</span></pre>
+            </article>
+            <!--
+            <article id="condition">
+                <h3>Condition</h3>
+                <p>Créer des alternatives.</p>
+                <pre><span></span></pre>
+                <h4>Résultat :</h4>
+                <pre><span></span></pre>
+            </article>
+            -->
+            <article id="mixin">
+                <h3>Mixins</h3>
+                <p>Utiliser des fonctions.</p>
+                <pre><span><em>@mixin dark-bkg</em> {</span>
+<span>  background:#111;</span>
+<span>  color:#fff;</span>
+<span>}</span>
+<span></span>
+<span>header{ <em>@include dark-bkg;</em> }</span>
+<span></span>
+<span>footer{ <em>@include dark-bkg;</em> }</span></pre>
+                <h4>Résultat :</h4>
+                <pre><span>header {</span>
+<span>  background:#111;</span>
+<span>  color:#fff;</span>
+<span>}</span>
+<span></span>
+<span>footer {</span>
+<span>  background:#111;</span>
+<span>  color:#fff;</span>
+<span>}</span></pre>
+            </article>
+            
+            
+            <article id="parametres">
+                <h3>Paramètres</h3>
+                <p>Rendre les fonctions modulables.</p>
+                <pre><span>@mixin custom-bkg(<em>$bkg, $color</em>) {</span>
+<span>  background: <em>$bkg</em>;</span>
+<span>  color: <em>$color</em>;</span>
+<span>}</span>
+<span></span>
+<span>header{ @include custom-box(<em>#fff, #000</em>); }</span>
+<span>aside{ @include custom-box(<em>#eee, #333</em>); }</span></pre>
+                <h4>Résultat :</h4>
+                <pre><span>header {</span>
+<span>  background: #fff;</span>
+<span>  color: #000;</span>
+<span>}</span>
+<span></span>
+<span>footer {</span>
+<span>  background: #eee;</span>
+<span>  color: #333;</span>
+<span>}</span></pre>
+            </article>
+            
+            <article id="extends">
+                <h3>Extends</h3>
+                <p>Créer des extensions de codes.</p>
+                <pre><span><em>.error </em>{</span>
+<span>  border: 1px #F00;</span>
+<span>  background: #FDD;</span>
+<span>}</span>
+<span></span>
+<span>.badError {</span>
+<span>  <em>@extend .error</em>;</span>
+<span>  border-width: 3px;</span>
+<span>}</span></pre>
+                <h4>Résultat :</h4>
+                <pre><span>.error, .badError {</span>
+<span>  border: 1px #F00;</span>
+<span>  background: #FDD;</span>
+<span>}</span>
+<span></span>
+<span>.badError {</span>
+<span>  border-width: 3px;</span>
+<span>}</span></pre>
+            </article>
+            
+            <article id="import">
+                <h3>Import</h3>
+                <p>Répartir et diviser le développement</p>
+                <pre><span><em>@import 'partials/_vars'</em>;</span>
+<span></span>
+<span>body {</span>
+<span>  color: $color;</span>
+<span>}</span>
+<span></span>
+<span><del>/* content of _vars.scss</del></span>
+<span><del>$color: #333;  */</del></span></pre>
+                <h4>Résultat :</h4>
+                <pre><span>body {</span>
+<span>  color: #333;</span>
+<span>}</span></pre>
+            </article>
+            
+        </section>
+        <aside>
+            <span><img src="images/arrow-left.svg"></span>
+            <ul>
+                <li><a href="#variable">Variables</a></li>
+                <li><a href="#imbrication">Imbrication <em>(nesting)</em></a></li>
+                <li><a href="#arithmetique">Arithmétique</a></li>
+                <!--<li><a href="#condition">@if</a></li>-->
+                <li><a href="#mixin">@mixin</a></li>
+                <li><a href="#parametres">Paramètres</a></li>
+                <li><a href="#extends">@extend</a></li>
+                <li><a href="#import">@import</a></li>
+            </ul>
+        </aside>
+    </main>
+    <footer>
+        <p>Cheatsheet - Olivier D.</p>
+    </footer>
+</div>
+</body>
+</html>

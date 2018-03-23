@@ -9,25 +9,14 @@ var rename = require('gulp-rename');
 
 // Tâche "sass" = Sass complileur
 gulp.task('sass' , function(){
-
   return gulp.src('dev/scss/*.scss')
               .pipe(sass())
               .pipe(gulp.dest('dev/css/'))
               .pipe(gulp.dest('prod/css'))
 });
-
-// Tâche "imagemin" = image compresser 
-gulp.task('imagemin' , function(){
-
-  return gulp.src('dev/images/*.*')
-              .pipe(imagemin())
-              .pipe(rename({suffix:'.min'}))
-              .pipe(gulp.dest('dev/img'))
-});
 // Tâche "minicss" = css minify 
 gulp.task('minicss' , function(){
-
-  return gulp.src('dev/css/*.css')
+  return gulp.src('dev/css/styles.css')
               .pipe(cleanCSS())
               .pipe(rename({suffix:'.min'}))
               .pipe(gulp.dest('dev/css'));
@@ -39,11 +28,18 @@ gulp.task('js', function() {
     .pipe(rename({suffix:'.min'}))
     .pipe(gulp.dest('dev/js'));
 });
+// Tâche "imagemin" = image compresser 
+gulp.task('imagemin' , function(){
+  return gulp.src('dev/images/*.*')
+              .pipe(imagemin())
+              .pipe(rename({suffix:'.min'}))
+              .pipe(gulp.dest('dev/img'))
+});
 
-gulp.task('watch', function(){
-   
-    
-    gulp.watch('dev/scss/', ['sass']);
+
+
+gulp.task('watch', function(){   
+    gulp.watch('dev/scss/*.scss', ['sass']);
     gulp.watch('dev/css/*.css', ['minicss']);
 
     gulp.watch('dev/images/*.*', ['imagemin']);
